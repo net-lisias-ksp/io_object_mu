@@ -1,6 +1,8 @@
 io_object_mu
 ==========
 
+Fork for personal use by Lisias. Please, check taniwha's Official [Github](https://github.com/taniwha/io_object_mu) or [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/) for the thing.
+
 Blender addon for importing and exporting KSP .mu files.
 
 NOTE: the import/export functionality is still under heavy development, but
