@@ -1,6 +1,8 @@
 io_object_mu
 ==========
 
+Fork for personal use by Lisias. Please, check taniwha's Official [Github](https://github.com/taniwha/io_object_mu) or [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/) for the thing.
+
 Blender addon for importing and exporting KSP .mu files.
 
 NOTE: the import/export functionality is still under heavy development, but
@@ -15,19 +17,15 @@ will be preserved if mu.py is used to copy a .mu file. This is a bug.
 * mu.py always writes version 5 .mu files.
 * it may still break, back up your work.
 
-Installation Instructions
-=========================
 
-1. Clone the github repo
-2. Copy the entire folder (io_object_mu) into Blender's scripts/addons folder
-3. Start Blender
-4. Go to File ->  User Preferences... -> Add-ons tab -> Import-Export category
-5. Find "Import-Export: Mu model format (KSP)" in the list
-6. Check the checkbox next to it
-7. Click "Save User Settings"
+How to install
+--------------
 
-If you go to the File -> Import menu, it now has "KSP Mu" and "KSP Craft" in the list.
-
-The KSP Forum with discussions about this is located here:
-* https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/&
-
+1.Clone the github repo
+1. Copy the entire folder (io_object_mu) into Blender's scripts/addons folder
+1. Start Blender
+1. Go to File ->  User Preferences... -> Add-ons tab -> Import-Export category
+1. Find "Import-Export: Mu model format (KSP)" in the list
+1. Check the checkbox next to it
+1. Click "Save User Settings"
+1. If you go to the File -> Import menu, it now has "KSP Mu" and "KSP Craft" in the list
