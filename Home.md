@@ -8,4 +8,4 @@ In addition to importing `.mu` files, `io_object_mu` can import KSP's `.craft` f
 The KSP Forum with discussions about this is located here:
 * https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/&
 
-After [installing](https://github.com/taniwha/io_object_mu/wiki/Installation), the addon is ready for importing or exporting `.mu` files or importing `.craft` files.
+After [installing](https://github.com/taniwha/io_object_mu/wiki/Installation), the addon is ready for importing or exporting `.mu` files or [importing `.craft` files](https://github.com/taniwha/io_object_mu/wiki/CraftImport).
