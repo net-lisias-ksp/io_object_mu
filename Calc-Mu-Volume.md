@@ -10,7 +10,7 @@ One purpose it can be used for is to determine the volume of fuel and resource t
 To get the most accurate results and proper volume calculation, first make sure that all the object meshes you are performing the calculation on, are closed. This means there should be no open areas in the mesh. Think of it like a real tank: ALL the geometry should be closed up with faces, or it will leak.
 Calculating on open meshes is hit or miss, and unreliable, so its best practice to just close everything up.
 
-To get the volume calculation for your object, simply select the object(s) in Object mode, click the  “`Apply Scale`” button to make sure all scaling is updated, then click the “`Calc Mu Volume`” button.
+To get the volume calculation for your object, simply select the object(s) in Object mode,  click the “`Apply Scale`” button to make sure all scaling is updated, then click the “`Calc Mu Volume`” button.
 The calculated volume for both “Skin Volume” and “External Volume” will be displayed right below the “`Calc Mu Volume`” button, in the status bar.
 
 ![](https://i.imgur.com/IkjJgNS.png)
