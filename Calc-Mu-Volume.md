@@ -3,7 +3,7 @@ The “`Calc Mu Volume`” button can be used to calculate the volume of your me
 
 **(NOTE: Currently, it only works on a single parent object, and its immediate children, NOT including any sub-parents. There is an Issue logged on the repo to look into adding multiple object support.)**
 
-It is only used for informational purposes purposes, however, as it does not save the calculation either in the output .mu or .cfg files.
+It is only used for informational purposes, however, as it does not save the calculation either in the output .mu or .cfg files.
 
 One purpose it can be used for is to determine the volume of fuel and resource tanks, and that info used in relation to setting up realistic, or actual, fuel/resource tanks when setting up your part configs and ModuleManager patches for in-game resource balancing.
 
