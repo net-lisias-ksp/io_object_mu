@@ -5,7 +5,7 @@ The “`Calc Mu Volume`” button can be used to calculate the volume of your me
 
 It is only used for informational purposes, however, as it does not save the calculation either in the output .mu or .cfg files.
 
-One purpose it can be used for is to determine the volume of fuel and resource tanks, in relation to setting up realistic, or actual, fuel/resource tanks when setting up your part configs and ModuleManager patches for in-game resource balancing.
+One purpose it can be used for is to determine the volume of fuel and resource tanks, in relation to setting up realistic, or actual, values when setting up your part configs and ModuleManager patches for in-game resource balancing.
 
 To get the most accurate results and proper volume calculation, first make sure that all the object meshes you are performing the calculation on, are closed. This means there should be no open areas in the mesh. Think of it like a real tank: ALL the geometry should be closed up with faces, or it will leak.
 Calculating on open meshes is hit or miss, and unreliable, so its best practice to just close everything up.
