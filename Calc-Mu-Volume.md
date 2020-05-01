@@ -15,6 +15,8 @@ The calculated volume for both “Skin Volume” and “External Volume” will 
 
 ![](blob:https://imgur.com/3f947320-4e55-4600-b026-467e3c3955b8)
 ![](https://imgur.com/a/hpaqUCK)
+![](![](https://imgur.com/a/hpaqUCK))
+![Example Pic](![](https://imgur.com/a/hpaqUCK))
 
 NOTE: On scaling: if at any time before or after calculating the volume of your objects, you make ANY scaling changes to the objects or meshes, you MUST use the “`Apply Scale`” button, to get a correctly refreshed volume calculation.
 
