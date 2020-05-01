@@ -13,7 +13,7 @@ Calculating on open meshes is hit or miss, and unreliable, so its best practice 
 To get the volume calculation for your object, simply select the object(s) in Object mode, click the “`Apply Scale`” button to make sure all scaling is updated, then click the “`Calc Mu Volume`” button.
 The calculated volume for both “Skin Volume” and “External Volume” will be displayed right below the “`Calc Mu Volume`” button, in the status bar.
 
-![](<blockquote class="imgur-embed-pub" lang="en" data-id="a/hpaqUCK" data-context="false" ><a href="//imgur.com/a/hpaqUCK"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>)
+![](https://i.imgur.com/IkjJgNS.png)
 
 NOTE: On scaling: if at any time before or after calculating the volume of your objects, you make ANY scaling changes to the objects or meshes, you MUST use the “`Apply Scale`” button, to get a correctly refreshed volume calculation.
 
