@@ -17,7 +17,7 @@ The calculated volume for both “Skin Volume” and “External Volume” will 
 ![](https://imgur.com/a/hpaqUCK)
 ![](![](https://imgur.com/a/hpaqUCK))
 ![Example Pic](![](https://imgur.com/a/hpaqUCK))
-
+![](<blockquote class="imgur-embed-pub" lang="en" data-id="a/hpaqUCK" data-context="false" ><a href="//imgur.com/a/hpaqUCK"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>)
 NOTE: On scaling: if at any time before or after calculating the volume of your objects, you make ANY scaling changes to the objects or meshes, you MUST use the “`Apply Scale`” button, to get a correctly refreshed volume calculation.
 
 Taniwha says the “`Apply Scale`” button should ALWAYS be used as a final step, anyway, right before using the “`Export Mu Model`” to export the model, in order to properly calculate and update _**ANY**_ scaling changes made during your model creation.
