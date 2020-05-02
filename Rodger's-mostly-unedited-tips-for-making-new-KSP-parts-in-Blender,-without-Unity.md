@@ -8,6 +8,8 @@ Make sure your cfg.in has `rescaleFactor = 1.0` and `scale = 1.0`. Otherwise KSP
 
 Create an empty as the "root" part for your part, and name it the same as your part.cfg.in file (without the `.cfg.in` extensions). Child your meshes, colliders, and other transforms(empties) to this (shift drag the objects on top of the root empty is one way to do this). Make sure your meshes have their transforms applied (crtl A), so the transform panel reads 0° for the rotations, and 1.0 for the scale. Then select the root object, press `clearInverse`, double check nothing's out of place (colliders will move if you moved them originally via transform panel), then press the `export mu model` button. It will create a .mu file with the name of the root part, and a .cfg file too.
 
+If something's out of place in-game, the `clearInverse` button is worth pressing again and then re-exporting.
+
 The exporter will strip all ".xxx" suffixes, so you can have multiple instances of the same name in KSP, even when blender adds the numbered suffix to differentiate different instances with the same name.
 
 Add colliders via `add mu collider` tab inside the tool menu, or button at top. adjust size on creation, or in Mu Collider panel to adjust colliders size/location, inside the object properties panel of the properties editor, not the blender transform location/rotation/scale. The `isTrigger` option makes a non-solid collider, for ladders/hatches etc
