@@ -1,4 +1,5 @@
 In the same directory as your .blend, create a new .cfg file for your part, and add `.in` to the end of the file name (partname.cfg.in). There is a template included in the addon which includes calculations for volume/mass based on the mesh, but you can also just copy a stock cfg to start with.
+
 Once the cfg.in file is in the directory, when you export the part, the exporter will add certain things to a new cfg file it'll create based on the cfg.in:
 Empty objects called `node_XXX` will be turned into NODE{} definitions (single arrow helps see their rotation, but empty type doesnt matter). For surface attachment nodes, call the empty `node_attach`, and the exporter will add a "regular" node definition with the location data in it, as NODE{} doesn't work for srf attachment.
 The location of empty objects called CoMOffset, CoPOffset, or CoLOffset will be used to set CoM/CoP/CoL.
