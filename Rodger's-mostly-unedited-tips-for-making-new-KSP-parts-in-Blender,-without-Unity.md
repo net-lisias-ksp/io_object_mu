@@ -12,7 +12,7 @@ If something's out of place in-game, the `clearInverse` button is worth pressing
 
 The exporter will strip all ".xxx" suffixes, so you can have multiple instances of the same name in KSP, even when blender adds the numbered suffix to differentiate different instances with the same name.
 
-Add colliders via `add mu collider` tab inside the tool menu, or button at top. adjust size on creation, or in Mu Collider panel to adjust colliders size/location, inside the object properties panel of the properties editor, not the blender transform location/scale. Rotation needs to be done with blender's transform panel, but doesn't seem to cause any issues. The `isTrigger` option makes a non-solid collider, for ladders/hatches etc
+Add colliders via `add mu collider` tab inside the tool menu, or button at top. adjust size on creation, or in Mu Collider panel to adjust colliders size/location, inside the object properties panel of the properties editor, not the blender transform location/scale. Rotation needs to be done with blender's transform panel, but doesn't seem to cause any issues (and you seem to be able to get away with translations too). The `isTrigger` option makes a non-solid collider, for ladders/hatches etc. (you can use Sarbian's DebugStuff to view colliders in-game - https://forum.kerbalspaceprogram.com/index.php?/topic/135726-18-debugstuff-2019-10-22-see-the-hidden-secrets-of-the-game-objects/)
 
 Mu Shader panel, textures tab, Name: `_MainTex`, under that change 'grey' to your diffuse texture name. same for different maps eg `_BumpMap` (from `bump` to your normal map) or `_Emissive` (from `white`)
 
