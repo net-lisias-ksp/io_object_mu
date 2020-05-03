@@ -16,7 +16,7 @@ Add colliders via `add mu collider` tab inside the tool menu, or button at top. 
 
 Mu Shader panel, textures tab, Name: `_MainTex`, under that change 'grey' to your diffuse texture name. same for different maps eg `_BumpMap` (from `bump` to your normal map) or `_Emissive` (from `white`)
 
-For flag objects, go to the Mu Properties panel, (object properties panel of the properties editor), in "Tag:" type in and add `Icon_Hidden`, which will hide the flag mesh from the part tray. The flag mesh's UV map should be square to show the flag correctly, even when the mesh is the right aspect ratio (W = 1.6*H). Set the mu shader of the flag mesh to specular (transparent)
+For flag objects, go to the Mu Properties panel, (object properties panel of the properties editor), in "Tag:" type in and add `Icon_Hidden`, which will hide the flag mesh from the part tray. The flag mesh's UV map should be square to show the flag correctly, even when the mesh is the right aspect ratio (W = 1.6*H). Set the mu shader of the flag mesh to alpha translucent
 
 For parachutes, the model needs to be made with Y+ being "up", then "adopted" (set child) to an empty object, which is then rotated X+90° so the chute appears correct with Z+up in blender. The semi-deploy and fully deploy animations both need to start at frame 0, with the fully deploy starting position being the same as the end of the semi-deploy anim.
 
