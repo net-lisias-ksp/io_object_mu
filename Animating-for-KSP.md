@@ -22,7 +22,7 @@ Then double click the NLA track's name and rename to what you want the unity ani
 
 ![](https://i.imgur.com/4aqdrBg.png)
 
-You can name multiple NlaTracks the same name, and they will all be grouped together by the exporter, and played as one animation when activated by a KSP module.
+You can name multiple NlaTracks the same name, and they will all be grouped together by the exporter, and played as one animation when activated by a KSP module. You don't need to merge them in blender (you can't anyway)
 
 You can still edit the keyframes of an NLA track by selecting the track so it's yellow, and pressing tab or right click it - `start tweaking strip actions` (it should turn green). Then you can just edit or add keyframes as normal:
 
