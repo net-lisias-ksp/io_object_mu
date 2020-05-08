@@ -1,4 +1,4 @@
-Firstly for animation with key frames, rotation needs to be in quarternions, not eluer. You can still use eluer to edit, just change to quarternions and blender will convert for you:
+Firstly for animation with key frames, rotation needs to be in quarternions, not eluer. You can still use eluer to edit, just change to quarternions **before applying keyframes** and blender will convert for you:
 
 ![](https://i.imgur.com/Pa0EcuJ.png)
 
