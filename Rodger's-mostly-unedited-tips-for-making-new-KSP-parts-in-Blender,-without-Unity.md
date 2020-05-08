@@ -20,8 +20,4 @@ For flag objects, go to the Mu Properties panel, (object properties panel of the
 
 For parachutes, the model needs to be made with Y+ being "up", then "adopted" (set child) to an empty object, which is then rotated X+90° so the chute appears correct with Z+up in blender. The semi-deploy and fully deploy animations both need to start at frame 0, with the fully deploy starting position being the same as the end of the semi-deploy anim.
 
-for animation with key frames, rotation needs to be in quarternions, not eluer. You can still use eluer to edit, just change to quarternions and blender will convert for you.
-
-taniwha: if doing continuous rotations, because unity's curves are quaternion-only, you need to animate two full revolutions (in steps < 1 revolution) to avoid weird things happening at each revolution
-
-once you have your key frames, change the timeline editor to the nonlinear animation editor (or make a new space to have both), and you'll see tracks with the keyframe data in it. you need to push down the keyframe data into an NLA track, by pressing the button `Push Down Action`. You then get a new NlaTrack, and you then double click it's name and rename to what you want the unity animation clip to be called. All tracks need to start at frame 0. You can name multiple NlaTracks the same name, and they will all be grouped together and played at once when activated by a KSP module.
+For animation, see this page: https://github.com/taniwha/io_object_mu/wiki/Animating-for-KSP
