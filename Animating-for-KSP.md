@@ -27,3 +27,10 @@ You can name multiple NlaTracks the same name, and they will all be grouped toge
 You can still edit the keyframes of an NLA track by selecting the track so it's yellow, and pressing tab or right click it - `start tweaking strip actions` (it should turn green). Then you can just edit or add keyframes as normal:
 
 ![](https://i.imgur.com/7CCzEVA.png)
+
+You can convert an animation to quarts by using a dummy object with constraints and animation baking:
+0) animate the thing you want
+1) make a new object/mesh/whatever
+2) add a constraint to the new object, copy rotation
+3) bake that animation, so it doesn't have a constraint anymore, just its own keyframes (keys every frame)
+4) then, set the original thing to use quart rotations in the transform panel, and then repeat the last 2 steps, this time constraining the original object's rotation to the dummy objects. then bake the animation again, but this time since it's set to quarts, it'll key in quarts!
