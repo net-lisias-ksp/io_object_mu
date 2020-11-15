@@ -32,6 +32,6 @@ You can convert an animation to quarts by using a dummy object with constraints 
 
 0) animate the thing you want
 1) make a new object/mesh/whatever
-2) add a constraint to the new object, copy rotation
-3) bake that animation, so it doesn't have a constraint anymore, just its own keyframes (keys every frame)
+2) add a constraint to the new object, copy rotation, and set the animated object as the source
+3) bake that constraint animation, so it doesn't have a constraint anymore, just its own keyframes (keys every frame)
 4) then, set the original thing to use quart rotations in the transform panel, and then repeat the last 2 steps, this time constraining the original object's rotation to the dummy objects. then bake the animation again, but this time since it's set to quarts, it'll key in quarts!
