@@ -29,6 +29,7 @@ You can still edit the keyframes of an NLA track by selecting the track so it's 
 ![](https://i.imgur.com/7CCzEVA.png)
 
 You can convert an animation to quarts by using a dummy object with constraints and animation baking:
+
 0) animate the thing you want
 1) make a new object/mesh/whatever
 2) add a constraint to the new object, copy rotation
