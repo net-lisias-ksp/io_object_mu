@@ -23,7 +23,7 @@ If you don't want to copy the `io_object_mu` folder every time it has new change
 1. Open the command prompt as administrator, otherwise it won't work.
 2. Type the following command: **Change the paths according to your paths.**
 ```
-mklink /D 'C:\Program Files\Blender Foundation\Blender 2.83\2.83\scripts\addons\io_object_mu' D:\GitHub\io_object_mu
+mklink /D "C:\Program Files\Blender Foundation\Blender 2.92\2.92\scripts\addons\io_object_mu" D:\GitHub\io_object_mu
 ```
 
 ### Linux
