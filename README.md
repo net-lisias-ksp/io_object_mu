@@ -1,7 +1,7 @@
 io_object_mu
 ==========
 
-Fork for personal use by Lisias. Please, check taniwha's Official [Github](https://github.com/taniwha/io_object_mu) or [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/) for the thing.
+Fork for personal use by Lisias. Please, check taniwha's Official [Github](https://github.com/taniwha/io_object_mu) or [Forum](https://forum.kerbalspaceprogram.com/index.php?/topic/40056-*) for the thing.
 
 Blender addon for importing and exporting KSP .mu files.
 
@@ -21,11 +21,15 @@ will be preserved if mu.py is used to copy a .mu file. This is a bug.
 How to install
 --------------
 
-1.Clone the github repo
-1. Copy the entire folder (io_object_mu) into Blender's scripts/addons folder
-1. Start Blender
-1. Go to File ->  User Preferences... -> Add-ons tab -> Import-Export category
-1. Find "Import-Export: Mu model format (KSP)" in the list
-1. Check the checkbox next to it
-1. Click "Save User Settings"
-1. If you go to the File -> Import menu, it now has "KSP Mu" and "KSP Craft" in the list
+1. Clone the github repo
+2. Copy the entire folder (`io_object_mu`) into Blender's scripts/addons folder
+3. Start Blender
+4. Go to File ->  User Preferences... -> Add-ons tab -> Import-Export category
+5. Find "Import-Export: Mu model format (KSP)" in the list
+6. Check the checkbox next to it. Clicking on the little triangle to the left will open the configuration panel for the addon. You can...
+	1. Set the KSP GameData directory (point it at GameData itself, not just the KSP root directory). Required for craft import
+	2. Install shader presets. Optional. These make it easier to set up materials for exported models.
+	3. Install config templates (only one right now). Optional and rather advances (ask for details).
+	4. Install some color palette presets. Optional for texture painting etc.
+7. Click "Save User Settings"
+8. If you go to the File -> Import menu, it now has "KSP Mu" and "KSP Craft" in the list
