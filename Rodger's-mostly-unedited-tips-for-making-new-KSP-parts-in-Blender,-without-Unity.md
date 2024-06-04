@@ -22,3 +22,5 @@ For flag objects, go to the Mu Properties panel, (object properties panel of the
 For parachutes, the model needs to be made with Y+ being "up", then "adopted" (set child) to an empty object, which is then rotated X+90° so the chute appears correct with Z+up in blender. The semi-deploy and fully deploy animations both need to start at frame 0, with the fully deploy starting position being the same as the end of the semi-deploy anim.
 
 For animation, see this page: https://github.com/taniwha/io_object_mu/wiki/Animating-for-KSP
+
+If you get dark lines on a surface appearing where UV seams or just general edges are, on 'thin' objects like shrouds or fairings, try splitting the inside faces from the outside faces. 
