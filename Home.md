@@ -10,4 +10,4 @@ The KSP Forum with discussions about this is located here:
 
 After [installing](https://github.com/taniwha/io_object_mu/wiki/Installation), the addon is ready for importing or exporting `.mu` files or [importing `.craft` files](https://github.com/taniwha/io_object_mu/wiki/CraftImport).
 
-Blender version 3.6.8 is recommended.
+Blender version 3.6.8 is recommended. Download at https://download.blender.org/release/Blender3.6/.
