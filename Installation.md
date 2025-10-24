@@ -10,7 +10,7 @@ If you don't have Git already, [you can download it from here.](https://git-scm.
 4. Go to Edit -> Preferences... -> Add-ons tab.
 5. Type `ksp` into the search box and find `Import-Export: Mu model format (KSP)` in the list.
 6. Check the checkbox on the left of the list item.
-7. Optionally, click on the little triangle on the left of the list item: it will open additional settings. Here you can set the KSP `GameData` directory (required for craft import), install shader presets (recommended), configuration template files, and some color palettes.
+7. Optionally, click on the little triangle on the left of the list item: it will open additional settings. Here you can set the KSP `GameData` directory (required for craft import), install shader presets (recommended), configuration template files, and some color palettes. (you may need to run Blender as administrator if you run into file permission errors)
 8. Optionally click "Save Preferences" hidden in the hamburger menu button in the lower left of the preferences window.
 
 If you now go to the File -> Import menu, it should have `KSP Craft (.craft)` and `KSP Mu (.mu)` at the bottom of the list, and in the File -> Export menu, `KSP Mu (.mu)`.
