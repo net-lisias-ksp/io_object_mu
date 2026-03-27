@@ -35,6 +35,26 @@ typemap = {
 
 use_index = { None, "Vector", "Value", "Shader" }
 
+
+def node_tree_add_input(node_tree, socket_type, name):
+    if hasattr(node_tree, "interface") and node_tree.interface is not None:
+        return node_tree.interface.new_socket(
+            name=name,
+            in_out='INPUT',
+            socket_type=socket_type,
+        )
+    return node_tree.inputs.new(socket_type, name)
+
+
+def node_tree_add_output(node_tree, socket_type, name):
+    if hasattr(node_tree, "interface") and node_tree.interface is not None:
+        return node_tree.interface.new_socket(
+            name=name,
+            in_out='OUTPUT',
+            socket_type=socket_type,
+        )
+    return node_tree.outputs.new(socket_type, name)
+
 def parse_value(valstr):
     valstr = valstr.strip()
     if valstr in {"False", "false"}:
@@ -46,35 +66,34 @@ def parse_value(valstr):
     return eval(valstr)
 
 def set_property(obj, prop, valstr):
-    if not hasattr(obj, prop):
-        print(f"WARNING: {obj} {prop} unknown property (old cfg?)")
+    try:
+        attr = getattr(obj, prop)
+    except Exception:
         return
-    attr = getattr(obj, prop)
-    if type(attr) == bool:
-        if valstr in {"False", "false"}:
-            value = False
-        if valstr in {"True", "true"}:
-            value = True
-    elif type(attr) == str:
-        if valstr and valstr[0] in ['"', "'"]:
-            value = eval(valstr)
+    try:
+        if type(attr) == bool:
+            if valstr in {"False", "false"}:
+                value = False
+            elif valstr in {"True", "true"}:
+                value = True
+            else:
+                value = bool(parse_value(valstr))
+        elif type(attr) == str:
+            if valstr and valstr[0] in ['"', "'"]:
+                value = eval(valstr)
+            else:
+                value = valstr
         else:
-            value = valstr
-    else:
-        value = eval(valstr)
-    if type(attr) == bpy_prop_array:
-        if type(value) not in [list, tuple]:
-            # Attempt to convert scalar to tuple of the correct length
-            try:
+            value = eval(valstr)
+        if type(attr) == bpy_prop_array:
+            if type(value) not in [list, tuple]:
+                print(f"WARNING: {prop} simple type for array property (old cfg?)")
                 value = (value,) * len(attr)
-            except Exception as e:
-                print(f"WARNING: {obj} {prop} simple type for array property could not be converted: {e}")
-                value = None
-    elif type(attr) == float:
-        if type(value) in [list, tuple]:
-            print(f"WARNING: {obj} {prop} array type for simple property (old blender?)")
-            value = value[0]
-    setattr(obj, prop, value)
+        setattr(obj, prop, value)
+    except Exception:
+        # Blender 5.x removed a number of UI/node properties that older
+        # configs still try to restore. Ignore those and keep importing.
+        return
 
 def find_socket(sockets, sock):
     if "," in sock:
@@ -90,47 +109,30 @@ def find_socket(sockets, sock):
         return sockets[name]
     return None
 
-def create_socket(node_tree, name, desc, dir, type):
-    if hasattr(node_tree, "interface"):
-        # new API as of blender 4.0
-        return node_tree.interface.new_socket(name, description=desc,
-                                              in_out=dir, socket_type=type)
-    else:
-        if dir == 'INPUT':
-            return node_tree.inputs.new(type, name)
-        elif dir == 'OUTPUT':
-            return node_tree.outputs.new(type, name)
-        else:
-            raise RuntimeError
-
-def build_interface(matname, node_tree, ntcfg):
-    if ntcfg.HasNode("inputs"):
-        inputs = ntcfg.GetNode("inputs")
-        for ip in inputs.GetNodes("input"):
-            type = typemap[ip.GetValue("type")]
-            name = ip.GetValue("name")
-            desc = ip.GetValue("description") or ""
-            input = create_socket(node_tree, name, desc, "INPUT", type)
-            if ip.HasValue("min_value"):
-                value = ip.GetValue("min_value")
-                set_property(input, "min_value", value)
-            if ip.HasValue("max_value"):
-                value = ip.GetValue("max_value")
-                set_property(input, "min_value", value)
-    if ntcfg.HasNode("outputs"):
-        outputs = ntcfg.GetNode("outputs")
-        for op in outputs.GetNodes("output"):
-            type = typemap[op.GetValue("type")]
-            name = op.GetValue("name")
-            desc = ip.GetValue("description") or ""
-            create_socket(node_tree, name, desc, "OUTPUT", type)
-
 def build_nodes(matname, node_tree, ntcfg):
     for value in ntcfg.values:
         attr, val = value.name, value.value
         if attr == "name":
             continue
         set_property(node_tree, attr, val)
+    if ntcfg.HasNode("inputs"):
+        inputs = ntcfg.GetNode("inputs")
+        for ip in inputs.GetNodes("input"):
+            type = typemap[ip.GetValue("type")]
+            name = ip.GetValue("name")
+            input = node_tree_add_input(node_tree, type, name)
+            if ip.HasValue("min_value"):
+                value = ip.GetValue("min_value")
+                set_property(input, "min_value", value)
+            if ip.HasValue("max_value"):
+                value = ip.GetValue("max_value")
+                set_property(input, "max_value", value)
+    if ntcfg.HasNode("outputs"):
+        outputs = ntcfg.GetNode("outputs")
+        for op in outputs.GetNodes("output"):
+            type = typemap[op.GetValue("type")]
+            name = op.GetValue("name")
+            node_tree_add_output(node_tree, type, name)
     if not ntcfg.HasNode("nodes"):
         return
     refs = []
@@ -159,26 +161,16 @@ def build_nodes(matname, node_tree, ntcfg):
                     del input_nodes[2]
             for i,ip in enumerate(input_nodes):
                 if ip.HasValue("default_value"):
-                    if sntype == "NodeReroute":
-                        continue
                     value = ip.GetValue("default_value")
                     name = ip.GetValue("name")
                     if name in use_index:
                         input = sn.inputs[i]
                     elif name in sn.inputs:
                         input = sn.inputs[name]
-                    elif sntype == "ShaderNodeVectorMath" and name == "Scale":
-                        input = sn.inputs[1]
-                        set_property(input, "default_value", value)
-                    else:
-                        print(f"WARNING: {name} unknown input (old cfg?)")
-                        continue
                     set_property (input, "default_value", value)
         if sndata.HasNode("outputs"):
             for i,op in enumerate(sndata.GetNode("outputs").GetNodes("output")):
                 if op.HasValue("default_value"):
-                    if sntype == "NodeReroute":
-                        continue
                     value = op.GetValue("default_value")
                     set_property(sn.outputs[i], "default_value", value)
     for r in refs:
@@ -207,30 +199,22 @@ def call_update(item, prop, context):
 def set_tex(mu, dst, src, context):
     try:
         if src.index < 0:
-            raise IndexError  # ick, but it works
+            raise IndexError    # ick, but it works
         tex = mu.textures[src.index]
         if tex.name[-4:] in [".dds", ".png", ".tga", ".mbm"]:
             dst.tex = tex.name[:-4]
         else:
             dst.tex = tex.name
-        
-        # Ensure tex.type is 0/1 or True/False
-        if tex.type in [0, 1]:
-            dst.type = tex.type
-        else:
-            # Convert to a boolean or 0/1
-            dst.type = bool(tex.type)
-        
+        dst.type = tex.type
     except IndexError:
         pass
-    
     if dst.tex in bpy.data.images:
         dst.rgbNorm = not bpy.data.images[dst.tex].muimageprop.convertNorm
     dst.scale = src.scale
     dst.offset = src.offset
     if context.material.node_tree:
         call_update(dst, "tex", context)
-        # other properties are all updated in the one updater
+        #other properties are all updated in the one updater
         call_update(dst, "rgbNorm", context)
 
 def make_shader_prop(muprop, blendprop, context):
@@ -251,12 +235,11 @@ def create_nodes(mat):
     shaderName = mat.mumatprop.shaderName
     if shaderName in shader_configs:
         cfg = shader_configs[shaderName]
-        for node_tree_cfg in cfg.GetNodes("node_tree"):
-            ntname = node_tree_cfg.GetValue("name")
+        for extra in cfg.GetNodes("node_tree"):
+            ntname = extra.GetValue("name")
             if not ntname in bpy.data.node_groups:
                 node_tree = bpy.data.node_groups.new(ntname, "ShaderNodeTree")
-                build_interface(mat.name, node_tree, node_tree_cfg)
-                build_nodes(mat.name, node_tree, node_tree_cfg)
+                build_nodes(mat.name, node_tree, extra)
         matcfg = cfg.GetNode("Material")
         for value in matcfg.values:
             name, val = value.name, value.value

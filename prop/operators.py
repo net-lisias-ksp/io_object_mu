@@ -28,8 +28,9 @@ from bpy.props import StringProperty, EnumProperty
 
 from ..preferences import Preferences
 from ..cfgnode import ConfigNode, ConfigNodeError
+from ..utils import strip_nnn
 from ..model import instantiate_model
-from .prop import loaded_props_collection, make_prop, import_prop
+from .prop import loaded_props_collection, make_prop
 
 def import_prop_op(self, context, filepath):
     operator = self
@@ -37,13 +38,13 @@ def import_prop_op(self, context, filepath):
     bpy.context.preferences.edit.use_global_undo = False
 
     try:
+        pass
         for obj in bpy.context.scene.objects:
             obj.select_set(False)
         prop = import_prop(filepath).get_model()
         context.layer_collection.collection.objects.link(prop)
         prop.location = context.scene.cursor.location
         prop.select_set(True)
-        context.view_layer.objects.active = prop
         return {'FINISHED'}
     except:
         raise
