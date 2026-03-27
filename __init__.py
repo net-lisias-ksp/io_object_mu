@@ -22,11 +22,11 @@
 bl_info = {
     "name": "Mu model format (KSP)",
     "author": "Bill Currie",
-    "blender": (2, 80, 0),
-    "api": 35622,
+    "blender": (5, 1, 0),
     "location": "File > Import-Export",
     "description": "Import-Export KSP Mu format files. (.mu)",
-    "warning": "not even alpha",
+    "version": (0, 9, 0),
+    "warning": "Legacy KSP add-on ported for Blender 5.1; runtime testing still recommended",
     "wiki_url": "",
     "tracker_url": "",
 #    "support": 'OFFICIAL',
@@ -68,8 +68,10 @@ preloaded_modules = None
 
 def register_submodules(name, submodule_names):
     global preloaded_modules
-    module = __import__(name=name, fromlist=submodule_names)
-    submodules = [getattr(module, name) for name in submodule_names]
+    submodules = []
+    for subname in submodule_names:
+        mod = importlib.import_module(f".{subname}", package=name)
+        submodules.append(mod)
     for mod in submodules:
 
         # Look through the modules present when register was called. If this
