@@ -1,26 +1,24 @@
-io_object_mu
-==========
+# Blender 5.1 port notes
 
-Blender addon for importing and exporting KSP .mu files.
+This package is a best-effort compatibility refresh of the legacy `io_object_mu` add-on.
 
-NOTE: the import/export functionality is still under heavy development, but
-importing is mostly working for static meshes (minus normals and tangents).
+## Changes made
 
-mu.py is the main workhorse: it reads and writes .mu files. It is independent
-of blender and works with both versions 2 and 3 of python. Some notes on mu.py:
-* vectors and quaternions are converted from Unities LHS to Blender's RHS on
-load and back again when writing.
-* vertex tangents are broken (they are incorrectly treated as quaternions), but
-will be preserved if mu.py is used to copy a .mu file. This is a bug.
-* mu.py always writes version 5 .mu files.
-* it may still break, back up your work.
+- Updated `bl_info` metadata for Blender 5.1.
+- Added `utils/blender_compat.py` with compatibility helpers.
+- Replaced direct `mesh.use_auto_smooth = True` with a guarded compatibility call because `Mesh.use_auto_smooth` was removed in Blender 4.1+.
+- Fixed temporary mesh cleanup around `Object.to_mesh()` / `to_mesh_clear()` to work more reliably with evaluated objects.
+- Replaced direct `depsgraph.update()` usage with a view-layer update helper after modifier visibility changes.
 
-Further Reading
-===============
+## Files touched
 
-[There's a wiki](https://github.com/taniwha/io_object_mu/wiki) covering topics
-including [installation](https://github.com/taniwha/io_object_mu/wiki/Installation).
+- `__init__.py`
+- `import_mu/mesh.py`
+- `collider/operators.py`
+- `export_mu/volume.py`
+- `utils/blender_compat.py` (new)
 
-The KSP Forum with discussions about this is located here:
-* https://forum.kerbalspaceprogram.com/index.php?/topic/40056-12-14-blender-mu-importexport-addon/&
+## Caveat
 
+This code was statically checked (`py_compile`) after the edits, but not fully runtime-tested inside a live Blender 5.1 session in this environment.
+You should still test import, export, collider generation, and volume export in Blender 5.1.
