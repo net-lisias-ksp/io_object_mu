@@ -66,7 +66,7 @@ def create_bone(bone_obj, edit_bones):
     bone.use_inherit_rotation = True
     bone.use_envelope_multiply = False
     bone.use_deform = True
-    bone.inherit_scale = 'FULL'
+    bone.use_inherit_scale = True
     bone.use_local_location = False
     bone.use_relative_parent = False
     bone.use_cyclic_offset = False
@@ -118,11 +118,7 @@ def create_bindPose(mu, muobj, skin):
         bone = mu.objects[bname]
         posebone = skin.bindPose_obj.pose.bones[bname]
         constraint = posebone.constraints.new('COPY_TRANSFORMS')
-        try:
-            constraint.target = bone.owner.armature_obj
-        except Exception as e:
-            print(f"ERROR: {e}, for armature: {muobj.armature}")
-            #FIXME add handle to no attribute 'armature_obj'
+        constraint.target = bone.owner.armature_obj
         constraint.subtarget = bname
     # don't clutter the main collection if importing to a different collection
     ctx.layer_collection.collection.objects.unlink(skin.bindPose_obj)
@@ -136,47 +132,35 @@ def find_bones(mu, skins, siblings):
     for skin in skins:
         bone_names = skin.skinned_mesh_renderer.bones
         for bname in bone_names:
-            if bname in mu.objects:
-                bone = mu.objects[bname]
-                if bone:
-                    bones.add(bone)
+            bones.add(mu.objects[bname])
+
     roots = set()
     for b in bones:
-        if b.parent and b.parent not in bones:
+        if b.parent not in bones:
             roots.add(b)
-    #print(list(map(lambda b: b.transform.name if b.transform else 'None', bones)))
-    #print(list(map(lambda b: b.transform.name if b.transform else 'None', roots)))
+    #print(list(map(lambda b: b.transform.name, bones)))
+    #print(list(map(lambda b: b.transform.name, roots)))
     prev_roots = set()
     while len(roots) > 1 and roots ^ prev_roots:
         prev_roots = set(roots)
         for b in prev_roots:
-            if b and (b in siblings or (b.parent and b.parent in skins)):
+            if b in siblings or b.parent in skins:
                 continue
-            if b:
-                roots.remove(b)
-                if b.parent:
-                    bones.add(b.parent)
-                    roots.add(b.parent)  
+            roots.remove(b)
+            bones.add(b.parent)
+            roots.add(b.parent)
     parents = set()
     for b in roots:
-        if b and b.parent:
-            parents.add(b.parent)
-    #print(list(map(lambda b: b.transform.name if b.transform else 'None', parents)))
+        parents.add(b.parent)
+    #print(list(map(lambda b: b.transform.name, parents)))
     for b in bones:
-        if b and b.parent:
-            p = b.parent
-            while p and p not in parents:
-                p = p.parent
-            b.owner = p
-            if p:
-                if not hasattr(p, "armature_bones"):
-                    p.armature_bones = set()
-                if b not in p.armature_bones:
-                    p.armature_bones.add(b)
-                    # Ensure armature_obj is set (OPTIONAL)
-                    if not hasattr(p, 'armature_obj'):
-                        p.armature_obj = p
-
+        p = b.parent
+        while p not in parents:
+            p = p.parent
+        b.owner = p
+        if not hasattr(p, "armature_bones"):
+            p.armature_bones = set()
+        p.armature_bones.add(b)
     return bones, roots, parents
 
 def make_matrix(transform):

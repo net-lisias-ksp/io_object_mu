@@ -27,6 +27,7 @@ from ..utils import create_data_object
 
 from .armature import create_vertex_groups, create_armature_modifier
 from .armature import create_bindPose
+from ..utils.blender_compat import enable_custom_normals
 
 def attach_material(mesh, renderer, mu):
     if mu.materials and renderer.materials:
@@ -45,24 +46,7 @@ def create_normals(mu, normals, mesh):
     for i, loop in enumerate(mesh.loops):
         custom_normals[i] = normals[loop.vertex_index]
     mesh.normals_split_custom_set(custom_normals)
-    if hasattr(mesh, "use_auto_smooth"):
-        # From blender 4.1 release notes:
-        #  use_auto_smooth is removed. Face corner normals are now used
-        #  automatically if there are mixed smooth vs. not smooth tags.
-        #  Meshes now always use custom normals if they exist.
-        mesh.use_auto_smooth = True
-
-def create_colors(mu, colors, mesh):
-    if not mesh.color_attributes:
-        name = "colors" if colors else "∧default"
-        mesh.color_attributes.new(name, 'FLOAT_COLOR', 'POINT')
-    color_layer = mesh.color_attributes.active_color
-    if colors:
-        for i, c in enumerate(colors):
-            color_layer.data[i].color = c
-    else:
-        for i in range(len(color_layer.data)):
-            color_layer.data[i].color = (1,1,1,1)
+    enable_custom_normals(mesh)
 
 def create_mesh(mu, mumesh, name):
     mesh = bpy.data.meshes.new(name)
@@ -76,7 +60,6 @@ def create_mesh(mu, mumesh, name):
         create_uvs(mu, mumesh.uv2s, mesh, "UVMap2")
     if mumesh.normals:
         create_normals(mu, mumesh.normals, mesh)
-    create_colors(mu, mumesh.colors, mesh)
     #FIXME how to set tangents?
     #if mumesh.tangents:
     #    for i, t in enumerate(mumesh.tangents):
