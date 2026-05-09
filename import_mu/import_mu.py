@@ -24,7 +24,6 @@ import os.path
 from math import pi, sqrt
 
 import bpy
-import bpy_types
 import mathutils
 from mathutils import Vector, Quaternion
 
@@ -66,7 +65,7 @@ def create_component_object(collection, component, objname, xform):
         name = ".".join([objname, name])
     else:
         name = objname
-    if type(data) == bpy.types.Object: #if type(data) == bpy_types.Object:
+    if type(data) == bpy.types.Object:
         cobj = data
         if xform:
             set_transform(cobj, xform)
