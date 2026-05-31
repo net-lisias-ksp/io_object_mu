@@ -6,6 +6,7 @@ If you don't have Git already, [you can download it from here.](https://git-scm.
 2. Copy the entire `io_object_mu` folder into Blender's `scripts/addons` folder.
     1. For Windows users, this is `C:\Program Files\Blender Foundation\Blender <version>\<version>\scripts\addons`
     2. For Linux users, this is `~/.config/blender/<version>/scripts/addons`.
+    3. For MacOS users, thi is `~/Library/Application Support/Blender/<version>/scripts/addons`
 3. Start Blender.
 4. Go to Edit -> Preferences... -> Add-ons tab.
 5. Type `ksp` into the search box and find `Import-Export: Mu model format (KSP)` in the list.
